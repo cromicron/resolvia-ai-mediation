@@ -1,0 +1,154 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.chat-area {
+  width: 60%;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chat-area #chatDisplay {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  height: 70%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-area .input-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-area .input-area textarea {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  resize: none;
+  overflow: hidden;
+  min-height: 40px;
+  max-height: 100px;
+}
+
+.chat-area .input-area button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.chat-area .input-area button:hover {
+  background-color: #45a049;
+}
+
+.statement-area {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.statement-area textarea {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+.statement-area button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #008CBA;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.statement-area button:hover {
+  background-color: #007B9F;
+}
+
+.user-message {
+  text-align: right;
+  background-color: #DCF8C6;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  align-self: flex-end;
+  max-width: 70%;
+}
+
+.bot-message {
+  text-align: left;
+  background-color: #f8f8f8;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  align-self: flex-start;
+  max-width: 70%;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  animation: dot 1.4s infinite;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+@keyframes dot {
+  0%, 80%, 100% {
+    opacity: 0;
+  }
+  30%, 50% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,10 @@
+<h2>Continue Mediation</h2>
+<ul>
+    {% for mediation in mediations %}
+        <li>
+            <a href="{{ url_for('mediation.mediation_detail', mediation_id=mediation.mediation_id) }}">
+                Mediation: {{ mediation.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

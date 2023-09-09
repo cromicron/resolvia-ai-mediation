@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Mediation</title>
+ <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/private_mediation.css') }}">
+  <script src="{{ url_for('static', filename='js/private_mediation.js') }}" defer></script>
+</head>
+<body data-mediation-id="{{ mediation_id }}">
+  <div class="container">
+    <div class="chat-area">
+      <div id="chatDisplay">
+        <!-- Chat messages will be added here -->
+              <!-- Loop through messages and display them  if there is a chat history-->
+        {% for message in messages %}
+            {% if message.role != 'system' %}
+                <div class="{{ 'user-message' if message.role == 'user' else 'bot-message' }}">
+                    {{ message.content }}
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div id="typing-indicator" class="bot-message" style="display: none;">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      <div class="input-area">
+        <textarea id="chatInput" placeholder="Type your message here..." rows="1"></textarea>
+        <button id="submitChat">Submit</button>
+      </div>
+    </div>
+    <div class="statement-area">
+      <button id="showStatement">Show Statement Area</button>
+      <textarea id="statementInput" {% if not current_statement %}class="hidden"{% endif %}>{{ current_statement }}</textarea>
+      <button id="submitStatement">Submit Statement</button>
+    </div>
+  </div>
+</body>
+</html>

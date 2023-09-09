@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page</title>
+</head>
+<body>
+    <h1>Welcome to the Mediation App</h1>
+    <button><a href="{{ url_for('mediation.start_mediation') }}" class="btn btn-primary">Start Mediation</a>
+</button>
+    <button><a href="{{ url_for('mediation.continue_mediation') }}">Continue Mediation</a></button>
+    <a href="{{ url_for('auth.register') }}">Register</a>
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ url_for('auth.login') }}">Login</a>
+    {% endif %}
+</body>
+</html>

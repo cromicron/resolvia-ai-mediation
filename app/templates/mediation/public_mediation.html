@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Mediation</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/public_mediation.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body data-mediation-id="{{ mediation_id }}">
+
+    <script>
+        const user_id = "{{ user_id }}";
+    </script>
+    <button id="toggleSidebar" class="toggle-sidebar">
+        <i class="fas fa-bars"></i> <!-- Font Awesome icon for a menu -->
+    </button>
+
+        <div class="sidebar" id="sidebar">
+
+            <!-- Main navigation buttons -->
+            <button id="viewAgreementsBtn">View Agreements</button>
+
+            <!-- Agreement List Container -->
+            <div id="agreementList" class="hidden">
+                <h3>Agreements</h3>
+                <ul id="agreementTitles">
+                    {% for agreement in agreements %}
+                    <li>
+                        <!-- The title is clickable and contains a data attribute to store the agreement ID -->
+                        <h3 class="agreement-title" data-agreement-id="{{ agreement.id }}">
+                            {{ agreement.title }}
+                        </h3>
+                        <!-- The content of the agreement is hidden initially and also contains the agreement ID data attribute -->
+                        <p class="agreement-content hidden" data-agreement-id="{{ agreement.id }}">
+                            {{ agreement.text }}
+                        </p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Selected Agreement Display Container -->
+            <div id="selectedAgreement" class="hidden">
+                <h3 id="selectedAgreementTitle"></h3>
+                <p id="selectedAgreementContent"></p>
+            </div>
+        </div>
+
+    <div class="container">
+        <div class="statement-area" id="userStatementArea">
+            <h2>Your Statement
+                <button id="toggleStatementBtn" class="toggle-btn">Toggle</button>
+                <button id="generateListBtn" class="hidden">Generate List</button>
+            </h2>
+            <textarea id="userStatement" readonly>{{ conflict_statement_user }}</textarea>
+        </div>
+        <div class="chat-area">
+            <div id="chatDisplay">
+
+                <!-- Loop through messages and display them if there is a chat history-->
+                {% for id, role, content in messages %}
+                    {% if role == 'assistant' %}
+                        {% set css_class = 'bot-message' %}
+                    {% elif id == user_id %}
+                        {% set css_class = 'user-message' %}
+                    {% else %}
+                        {% set css_class = 'other-user-message' %}
+                    {% endif %}
+                    <div class="{{ css_class }}">
+                        {{ content }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="input-area">
+                <textarea id="chatInput" placeholder="Type a message..."></textarea>
+                <button id="submitChat" disabled>Submit</button>
+            </div>
+        </div>
+        <div class="statement-area" id="otherStatementArea">
+            <h2>Statement {{ name_other }}</h2>
+            <textarea id="otherStatement" readonly>{{ conflict_statement_other }}</textarea>
+        </div>
+    </div>
+    <div id="modal-overlay">
+        <div>
+            <h2>Agreement</h2>
+            <p id="agreement-text"></p>
+            <h3>Your Comments</h3>
+            <textarea id="user-comments"></textarea>
+            <button id="agree-btn">Agree</button>
+            <button id="disagree-btn">Disagree</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/public_mediation.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+</body>
+</html>

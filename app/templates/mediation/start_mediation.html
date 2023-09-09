@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Mediation</title>
+    <!-- You can include any CSS libraries or styles here if needed -->
+</head>
+<body>
+
+<h2>Start Mediation</h2>
+
+<form action="{{ url_for('mediation.start_mediation') }}" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.title.label }}<br>
+        {{ form.title(size=32) }}
+    </p>
+    <p>
+        {{ form.invitee.label }}<br>
+        {{ form.invitee(size=32) }}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+
+<!-- You can include any JS libraries or scripts here if needed -->
+
+</body>
+</html>

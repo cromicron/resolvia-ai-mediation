@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h2>Register</h2>
+    <form action="{{ url_for('auth.register') }}" method="post">
+        <!-- For security, include this hidden field -->
+        {{ form.hidden_tag() }}
+
+        <label for="username">Username:</label>
+        {{ form.username(size=32) }}<br>
+
+        <label for="email">Email:</label>
+        {{ form.email(size=32) }}<br>
+
+        <label for="password">Password:</label>
+        {{ form.password(size=32) }}<br>
+
+        <label for="password2">Repeat Password:</label>
+        {{ form.password2(size=32) }}<br>
+
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
